@@ -43,7 +43,7 @@ def get_operation():
             else:
                 raise ValueError("Invalid operation")
         except (ValueError, ZeroDivisionError) as e:
-            print(f"Помилка: {e}")
+            print(f"Mistake: {e}")
       
 
 def main():       

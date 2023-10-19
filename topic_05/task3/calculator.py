@@ -1,6 +1,4 @@
-from operations import calculator_if
-from operations import genIntValue
-from operations import get_operation
+from operations import genIntValue, get_operation, calculator_if
 
 
 def main():       
