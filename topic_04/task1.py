@@ -15,36 +15,51 @@ def divide(x, y):
     return result
 
 def calculator_if(value1, value2, operation):
-    if operation == '+':
-        return add(value1, value2)
-    elif operation == '-':
-        return subtract(value1, value2)
-    elif operation == '*':
-        return multiply(value1, value2)
-    elif operation == '/':
-        return divide(value1, value2)
-    else:
-        return "Error: Invalid operation"
+        if operation == '+':
+            return add(value1, value2)
+        elif operation == '-':
+            return subtract(value1, value2)
+        elif operation == '*':
+            return multiply(value1, value2)
+        elif operation == '/':
+            return divide(value1, value2)
+        else:
+            raise ValueError("Invalid operation")
+           
+def genIntValue(prompt: str):
+    while True:
+        try:
+            return int(input(prompt))
+        except ValueError:
+            print("Value is not an integer")
+            
+
+def get_operation():
+    while True:
+        try:
+            operation = input("Enter the operation (+, -, *, /): ")
+            if operation in ('+', '-', '*', '/'):
+                return operation
+            else:
+                raise ValueError("Invalid operation")
+        except (ValueError, ZeroDivisionError) as e:
+            print(f"Помилка: {e}")
+      
+
+def main():       
+        value1 = genIntValue("Enter the first integer (x): ")
+
+        value2 = genIntValue("Enter the second integer (y): ")
+    
+        operation = get_operation()
+    
+        print(calculator_if(value1, value2, operation))
 
 while True:
-    try:
-       
-        value1 = float(input("Enter the first value: "))
-        value2 = float(input("Enter the second value: "))
-    except ValueError:
-        print("Invalid input. Please enter numeric values.")
-        continue
-
-    while True:
-        operation = input("Enter the operation (+, -, *, /): ")
-        if operation in ('+', '-', '*', '/'):
-            break
-        else:
-            print("Invalid operation. Please enter +, -, *, or /.")
-
-    result = calculator_if(value1, value2, operation)
-    print(f"Result: {result}")
-
+    main()
     continue_calculation = input("Do you want to continue calculating? (yes/no): ")
     if continue_calculation.lower() != "yes":
         break
+
+
+
