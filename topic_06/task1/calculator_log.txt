@@ -1,0 +1,8 @@
+Entered: 2
+Entered: 3
+Selected operation: /
+(Full info) Action: /, Data: 2 / 3, Result: 0.6666666666666666
+Entered: 12
+Entered: 4
+Selected operation: *
+(Full info) Action: *, Data: 12 * 4, Result: 48
