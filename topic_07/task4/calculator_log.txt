@@ -2,3 +2,7 @@ Entered: 2
 Entered: 4
 Selected operation: /
 (Full info) Action: /, Data: 2 / 4, Result: 0.5
+Entered: 2
+Entered: 3
+Selected operation: -
+(Full info) Action: -, Data: 2 - 3, Result: -1
