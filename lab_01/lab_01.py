@@ -68,13 +68,15 @@ def updateElement():
             "age": input("Enter the new age : "),
             "city": input("Enter the new city : ")
         }
+        del list[userPosition]
+        insertPosition = 0
+        for i, elem in enumerate(list):
+            if updated_fields["name"] > elem["name"]:
+                insertPosition += 1
+            else:
+                break
 
-        for key, value in updated_fields.items():
-            if value:
-                list[userPosition][key] = value
-
-        list.sort(key=lambda x: x["name"])
-
+        list.insert(insertPosition, updated_fields)
         print("Student information updated")
     
     
