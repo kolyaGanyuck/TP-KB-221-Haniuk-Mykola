@@ -1,8 +1,7 @@
 import csv
+from sys import argv
 
-students_list = []
-
-def printAllList():
+def printAllList(students_list):
     for elem in students_list:
         strForPrint = (
             "Student name is " + elem["name"] + ",  Phone is " + elem["phone"] + ", age is " + elem["age"] + ", city is " + elem["city"]
@@ -10,7 +9,7 @@ def printAllList():
         print(strForPrint)
     return
 
-def addNewElement():
+def addNewElement(students_list):
     name = input("Please enter student name: ")
     phone = input("Please enter student phone: ")
     age = input("Please enter student age: ")
@@ -28,7 +27,7 @@ def addNewElement():
     print("New element has been added")
     return
 
-def deleteElement():
+def deleteElement(students_list):
     name = input("Please enter name to be deleted: ")
     deletePosition = -1
     for item in students_list:
@@ -42,7 +41,7 @@ def deleteElement():
         del students_list[deletePosition]
     return
 
-def updateElement():
+def updateElement(students_list):
     name = input("Please enter name to be updated: ")
     userPosition = -1
 
@@ -72,48 +71,51 @@ def updateElement():
         students_list.insert(insertPosition, updated_fields)
         print("Student information updated")
 
-
 def loadFromCSV(filename):
+    students_list = []
     with open(filename, "r") as file:
         reader = csv.DictReader(file)
         for row in reader:
             students_list.append(row)
+    return students_list
 
-
-def saveToCSV(filename):
+def saveToCSV(filename, students_list):
     with open(filename, "w", newline="") as file:
         fieldnames = ["name", "phone", "age", "city"]
         writer = csv.DictWriter(file, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerows(students_list)
 
-
 def main():
-    loadFromCSV("lab2.csv")
+    if len(argv) != 2:
+        print("Usage: python script.py filename.csv")
+        return
+
+    filename = argv[1]
+    students_list = loadFromCSV(filename)
 
     while True:
         choice = input("Please specify the action [C create, U update, D delete, P print, X exit]: ")
         match choice.lower():
             case "c":
                 print("New element will be created:")
-                addNewElement()
-                printAllList()
+                addNewElement(students_list)
+                printAllList(students_list)
             case "u":
                 print("Existing element will be updated")
-                updateElement()
+                updateElement(students_list)
             case "d":
                 print("Element will be deleted")
-                deleteElement()
+                deleteElement(students_list)
             case "p":
                 print("List will be printed")
-                printAllList()
+                printAllList(students_list)
             case "x":
                 print("Saving to CSV and exiting...")
-                saveToCSV("lab2.csv")
-                break
+                saveToCSV(filename, students_list)
+                return
             case _:
                 print("Wrong choice")
-
 
 if __name__ == "__main__":
     main()
